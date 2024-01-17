@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option java_multiple_files =  true;
+
+package com.grpc.common.employee;
+
+message Employee {
+  string id = 1;
+  string name = 2;
+}
+
+message EmployeeRequest {
+  repeated Employee employee = 1;
+}
+
+message EmployeeResponse {
+  string id = 1;
+}
+
+message EmployeeRequestStream {
+  string result = 1;
+}
+
+service EmployeeService {
+
+  // Unary
+  rpc create(EmployeeRequest) returns (EmployeeResponse);
+
+  // Streaming server
+  rpc createMultiple(EmployeeRequest) returns (stream EmployeeResponse);
+
+}
